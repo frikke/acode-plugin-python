@@ -5,6 +5,7 @@ const jszip = require('jszip');
 const iconFile = path.join(__dirname, '../icon.png');
 const pluginJSON = path.join(__dirname, '../plugin.json');
 const distFolder = path.join(__dirname, '../dist');
+const changelogMd = path.join(__dirname, '../changelog.md');
 let readmeDotMd = path.join(__dirname, '../readme.md');
 
 if (!fs.existsSync(readmeDotMd)) {
@@ -18,14 +19,15 @@ const zip = new jszip();
 zip.file('icon.png', fs.readFileSync(iconFile));
 zip.file('plugin.json', fs.readFileSync(pluginJSON));
 zip.file('readme.md', fs.readFileSync(readmeDotMd));
+zip.file('changelog.md', fs.readFileSync(changelogMd));
 
 loadFile('', distFolder);
 
 zip
   .generateNodeStream({ type: 'nodebuffer', streamFiles: true })
-  .pipe(fs.createWriteStream(path.join(__dirname, '../dist.zip')))
+  .pipe(fs.createWriteStream(path.join(__dirname, '../plugin.zip')))
   .on('finish', () => {
-    console.log('dist.zip written.');
+    console.log('plugin.zip written.');
   });
 
 function loadFile(root, folder) {
