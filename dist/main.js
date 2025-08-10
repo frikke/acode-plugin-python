@@ -48,7 +48,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module) {
 
 "use strict";
-eval("module.exports = /*#__PURE__*/JSON.parse('{\"$schema\":\"https://acode.app/schema/plugin/v0.1.0.json\",\"id\":\"acode.plugin.python\",\"name\":\"Python\",\"main\":\"dist/main.js\",\"version\":\"1.1.2\",\"readme\":\"README.md\",\"icon\":\"icon.png\",\"keywords\":[\"python\"],\"contributors\":[{\"name\":\"Ajit Kumar\",\"github\":\"deadlyjack\",\"role\":\"author\"}],\"author\":{\"name\":\"Ajit Kumar\",\"email\":\"me@ajitkumar.dev\",\"github\":\"deadlyjack\"}}');\n\n//# sourceURL=webpack://acode-plugin-python/./plugin.json?");
+eval("module.exports = /*#__PURE__*/JSON.parse('{\"$schema\":\"http://localhost:3031/schema/plugin/v0.1.0.json\",\"id\":\"acode.plugin.python\",\"name\":\"Python\",\"main\":\"dist/main.js\",\"version\":\"1.1.3\",\"readme\":\"README.md\",\"icon\":\"icon.png\",\"license\":\"MIT\",\"repository\":\"https://github.com/Acode-Foundation/acode-plugin-python.git\",\"keywords\":[\"python\"],\"author\":{\"name\":\"Ajit Kumar\",\"email\":\"me@ajitkumar.dev\",\"github\":\"deadlyjack\"}}');\n\n//# sourceURL=webpack://acode-plugin-python/./plugin.json?");
 
 /***/ })
 
