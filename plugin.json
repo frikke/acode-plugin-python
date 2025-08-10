@@ -1,5 +1,5 @@
 {
-  "$schema": "http://localhost:3031/schema/plugin/v0.1.0.json",
+  "$schema": "https://acode.app/schema/plugin/v0.1.0.json",
   "id": "acode.plugin.python",
   "name": "Python",
   "main": "dist/main.js",
