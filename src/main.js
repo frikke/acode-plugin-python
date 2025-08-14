@@ -1,6 +1,4 @@
-import tag from 'html-tag-js';
 import plugin from '../plugin.json';
-import style from './style.scss';
 
 class Python {
   #worker;
@@ -55,25 +53,19 @@ class Python {
     main.style.overflow = 'auto';
     main.style.boxSizing = 'border-box';
 
-    this.$runBtn = tag('span', {
-      className: 'icon play_arrow',
-      attr: {
-        action: 'run',
-      },
-      onclick: this.run.bind(this),
-    });
+    //     import font from './icon.ttf';
+    //     import style from './style.scss';
 
-    this.$style = tag('style', {
-      textContent: style,
-    });
+    const font = await import('./icon.ttf');
+    const style = await import('./style.scss');
 
-    this.$input = tag('div', {
-      className: 'print input',
-      child: tag('textarea', {
-        onkeydown: this.#onkeydown.bind(this),
-        oninput: this.#oninput.bind(this),
-      }),
-    });
+    // const style = '';
+
+    this.$runBtn = <div className='icon play_py' attr-action='run' onclick={this.run.bind(this)} />
+    this.$style = <style>{style.default.replace('icon.ttf', font.default)}</style>;
+    this.$input = <div className='print input'>
+      <textarea onkeydown={this.#onkeydown.bind(this)} oninput={this.#oninput.bind(this)} />
+    </div>;
 
     this.checkRunnable();
     editorManager.on('switch-file', this.checkRunnable.bind(this));

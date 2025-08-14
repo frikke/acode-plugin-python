@@ -1,21 +1,18 @@
-const { exec } = require('child_process');
-const path = require('path');
+import path from 'path';
+import packZip from "./pack-zip.js";
 
-module.exports = (env, options) => {
+export default (env, options) => {
   const { mode = 'development' } = options;
   const rules = [
     {
-      test: /\.hbs$/,
-      use: ['raw-loader'],
+      test: /\.(ttf)/,
+      type: 'asset/resource',
     },
     {
-      test: /\.m?js$/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env'],
-        },
-      },
+      test: /\.js$/,
+      type: 'javascript/auto',
+      exclude: /node_modules/,
+      use: ['html-tag-js/jsx/tag-loader.js', 'babel-loader'],
     },
     {
       test: /\.(sa|sc|c)ss$/,
@@ -33,8 +30,15 @@ module.exports = (env, options) => {
       main: './src/main.js',
       worker: './src/worker.js',
     },
+    devServer: {
+      // serve plugin.zip from root folder
+      static: ".",
+      port: 5500,
+      hot: false,
+      liveReload: false,
+    },
     output: {
-      path: path.resolve(__dirname, 'dist'),
+      path: path.resolve('dist'),
       filename: '[name].js',
       chunkFilename: '[name].js',
     },
@@ -44,18 +48,9 @@ module.exports = (env, options) => {
     plugins: [
       {
         apply: (compiler) => {
-          compiler.hooks.afterDone.tap('pack-zip', () => {
-            // run pack-zip.js
-            exec('node .vscode/pack-zip.js', (err, stdout, stderr) => {
-              if (err) {
-                console.error(err);
-                return;
-              }
-              console.log(stdout);
-            });
-          });
-        }
-      }
+          compiler.hooks.afterDone.tap("pack-zip", packZip);
+        },
+      },
     ],
   };
 
